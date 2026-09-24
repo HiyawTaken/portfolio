@@ -505,25 +505,29 @@
             <div class="bar" style="--h:.79"><span>0.79</span><i>+ synthetic</i></div>
           </div>
           <div class="card-top">
-            <span class="org"><b class="own">PERSONAL PROJECT</b> · <span class="wip"><i></i>IN PROGRESS</span></span>
+            <span class="org"><b class="own">PERSONAL PROJECT</b> · <span class="live"><i></i>LIVE DEMO</span></span>
             <span class="open-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
           </div>
           <h3>End-to-end Bitcoin prediction pipeline</h3>
-          <p class="desc">Ingests BTC price data and 59k+ news headlines, scores sentiment with a fine-tuned CryptoBERT, and predicts with an LSTM I wrote from scratch in CuPy. I audited my own results, found a leak, and proved what the data can and can't predict.</p>
-          <ul class="tags"><li>CuPy</li><li>CryptoBERT</li><li>Hugging Face</li><li>Snowflake</li><li>dbt</li><li>Airflow</li><li>FastAPI</li></ul>
+          <p class="desc">A production pipeline that runs every day: it ingests BTC prices and crypto headlines, scores sentiment with a fine-tuned CryptoBERT, and predicts with an LSTM I wrote from scratch in CuPy. I audited my own results, found a leak, and proved what the data can and can't predict. The live dashboard says so next to every call.</p>
+          <ul class="tags"><li>CuPy</li><li>CryptoBERT</li><li>Hugging Face</li><li>BigQuery</li><li>dbt</li><li>Airflow</li><li>FastAPI</li></ul>
           <div class="more">
-            <p class="org">Personal project · 2026 · Production pipeline in progress</p>
+            <p class="org">Personal project · 2026 · Live dashboard</p>
             <h3>BTC prediction pipeline</h3>
-            <p>A full pipeline, from data ingestion to prediction, that takes raw Bitcoin price data and crypto news headlines and predicts where BTC lands 3 days out. No <code>model.fit()</code>: every gate, gradient, and weight update is written by hand in CuPy.</p>
+            <p>A full pipeline, from data ingestion to prediction, that takes raw Bitcoin price data and crypto news headlines and predicts where BTC lands 3 days out. It runs unattended every morning and publishes to a live dashboard. No <code>model.fit()</code>: every gate, gradient, and weight update is written by hand in CuPy.</p>
             <ul>
               <li><b>Sentiment model:</b> fine-tuned CryptoBERT on 59k+ relabeled news headlines, taking macro-F1 from 0.39 to 0.79 with a market-impact labeling rubric and 500 targeted synthetic examples. The model and dataset are public on Hugging Face.</li>
               <li><b>Features:</b> 27 engineered features (RSI, MACD, Bollinger Bands, ATR, VWAP, SPY/DXY returns, sentiment rolling averages), pruned to 22 by removing pairs correlated above 0.95.</li>
               <li><b>LSTM from scratch:</b> Xavier init, BPTT, and gradient clipping, in binary (sigmoid + BCE) and three-class (softmax + weighted CE) versions. I found and fixed four silent gradient bugs.</li>
               <li><b>Rigor:</b> a purged chronological 70/15/15 split with a horizon-length gap. An early 0.551 accuracy turned out to be selection bias from early stopping on test data, and retraining properly exposed it.</li>
               <li><b>Finding:</b> five independent checks (logistic regression, gradient boosting, and three LSTM setups) all land at the no-information baseline. Technical indicators plus sentiment don't predict 3-day BTC direction, and I can show it with numbers.</li>
-              <li><b>Production pipeline (in progress):</b> daily ingestion into a Snowflake warehouse (raw, staging, and marts layers), dbt transformations, Airflow orchestration, and a FastAPI dashboard serving daily predictions.</li>
+              <li><b>Production pipeline:</b> daily ingestion into a BigQuery warehouse (raw, staging, and marts layers), dbt transformations, and a 7-task Airflow 3 DAG run on GitHub Actions. Inference is a NumPy-only forward pass, so production needs no GPU, and a FastAPI dashboard on Render serves the results.</li>
+              <li><b>Built to fail loudly:</b> idempotent merges on every load, a guard that refuses to predict on stale features, and a post-run check that fails the workflow if no fresh prediction landed. When my Snowflake trial ended mid-build, I moved the warehouse to BigQuery without changing how data flows.</li>
+              <li><b>Live results:</b> 690 predictions backfilled and tracked daily. As of Sep 2026 the model hits 49.6% vs. 52.5% for always predicting "up", inside the ±3.7-point margin of error. The dashboard shows this next to every prediction.</li>
             </ul>
             <div class="modal-links">
+              <a href="https://btc-direction-dashboard.onrender.com" target="_blank" rel="noopener">Live dashboard ↗</a>
+              <a href="https://github.com/HiyawTaken/btc-prediction-pipeline" target="_blank" rel="noopener">Pipeline repo ↗</a>
               <a href="https://github.com/HiyawTaken/btc-sentiment-predictor" target="_blank" rel="noopener">Modeling repo ↗</a>
               <a href="https://huggingface.co/HiyawErtiro/cryptobert-finetuned_on_news_headlines" target="_blank" rel="noopener">Model on Hugging Face ↗</a>
               <a href="https://huggingface.co/datasets/HiyawErtiro/bitcoin-news-sentiments-latest" target="_blank" rel="noopener">Dataset ↗</a>
