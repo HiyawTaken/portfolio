@@ -471,7 +471,7 @@
       <div class="kit">
         <div class="kit-group reveal"><h4>Languages</h4><ul><li>Python</li><li>SQL</li><li>Java</li><li>C++</li><li>JavaScript</li></ul></div>
         <div class="kit-group reveal" style="--d:.06s"><h4>ML &amp; AI</h4><ul><li>PyTorch</li><li>XGBoost</li><li>LlamaIndex</li><li>RAG</li><li>OCR</li><li>Feature Engineering</li><li>CuPy</li><li>NumPy</li><li>Keras</li><li>TensorFlow</li><li>Hugging Face</li></ul></div>
-        <div class="kit-group reveal" style="--d:.12s"><h4>Data</h4><ul><li>Snowflake</li><li>Airflow</li><li>dbt</li><li>Azure SQL</li><li>SSMS</li><li>FastAPI</li></ul></div>
+        <div class="kit-group reveal" style="--d:.12s"><h4>Data</h4><ul><li>BigQuery</li><li>Snowflake</li><li>Airflow</li><li>dbt</li><li>Azure SQL</li><li>SSMS</li><li>FastAPI</li><li>GitHub Actions</li></ul></div>
         <div class="kit-group reveal"><h4>Cloud &amp; Compute</h4><ul><li>AWS</li><li>Azure</li><li>Slurm</li><li>Distributed Training</li><li>Docker</li></ul></div>
         <div class="kit-group reveal" style="--d:.06s"><h4>Visualization</h4><ul><li>Tableau</li><li>Matplotlib</li></ul></div>
         <div class="kit-group reveal" style="--d:.12s"><h4>Platforms</h4><ul><li>ServiceTitan</li><li>Salesforce</li></ul></div>
@@ -509,21 +509,21 @@
             <span class="open-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
           </div>
           <h3>End-to-end Bitcoin prediction pipeline</h3>
-          <p class="desc">A production pipeline that runs every day: it ingests BTC prices and crypto headlines, scores sentiment with a fine-tuned CryptoBERT, and predicts with an LSTM I wrote from scratch in CuPy. I audited my own results, found a leak, and proved what the data can and can't predict. The live dashboard says so next to every call.</p>
-          <ul class="tags"><li>CuPy</li><li>CryptoBERT</li><li>Hugging Face</li><li>BigQuery</li><li>dbt</li><li>Airflow</li><li>FastAPI</li></ul>
+          <p class="desc">A production data pipeline that runs every morning with no one touching it: it ingests BTC prices and crypto headlines into a BigQuery warehouse, transforms them with dbt, orchestrates with Airflow, and serves daily predictions to a live dashboard. The model behind it is one I built from scratch, and the dashboard is honest that it doesn't beat guessing.</p>
+          <ul class="tags"><li>BigQuery</li><li>dbt</li><li>Airflow</li><li>GitHub Actions</li><li>FastAPI</li><li>CuPy</li><li>CryptoBERT</li></ul>
           <div class="more">
             <p class="org">Personal project · 2026 · Live dashboard</p>
             <h3>BTC prediction pipeline</h3>
-            <p>A full pipeline, from data ingestion to prediction, that takes raw Bitcoin price data and crypto news headlines and predicts where BTC lands 3 days out. It runs unattended every morning and publishes to a live dashboard. No <code>model.fit()</code>: every gate, gradient, and weight update is written by hand in CuPy.</p>
+            <p>The production system around a model I'd already built: ingestion, a warehouse, transformations, orchestration, inference, and serving. Every day it pulls yesterday's Bitcoin close and a few hundred crypto headlines, scores the headlines, rebuilds the features, predicts where BTC lands 3 days out, and publishes the call. Swapping in a better model later is one file and a rerun.</p>
             <ul>
-              <li><b>Sentiment model:</b> fine-tuned CryptoBERT on 59k+ relabeled news headlines, taking macro-F1 from 0.39 to 0.79 with a market-impact labeling rubric and 500 targeted synthetic examples. The model and dataset are public on Hugging Face.</li>
-              <li><b>Features:</b> 27 engineered features (RSI, MACD, Bollinger Bands, ATR, VWAP, SPY/DXY returns, sentiment rolling averages), pruned to 22 by removing pairs correlated above 0.95.</li>
-              <li><b>LSTM from scratch:</b> Xavier init, BPTT, and gradient clipping, in binary (sigmoid + BCE) and three-class (softmax + weighted CE) versions. I found and fixed four silent gradient bugs.</li>
-              <li><b>Rigor:</b> a purged chronological 70/15/15 split with a horizon-length gap. An early 0.551 accuracy turned out to be selection bias from early stopping on test data, and retraining properly exposed it.</li>
-              <li><b>Finding:</b> five independent checks (logistic regression, gradient boosting, and three LSTM setups) all land at the no-information baseline. Technical indicators plus sentiment don't predict 3-day BTC direction, and I can show it with numbers.</li>
               <li><b>Production pipeline:</b> daily ingestion into a BigQuery warehouse (raw, staging, and marts layers), dbt transformations, and a 7-task Airflow 3 DAG run on GitHub Actions. Inference is a NumPy-only forward pass, so production needs no GPU, and a FastAPI dashboard on Render serves the results.</li>
               <li><b>Built to fail loudly:</b> idempotent merges on every load, a guard that refuses to predict on stale features, and a post-run check that fails the workflow if no fresh prediction landed. When my Snowflake trial ended mid-build, I moved the warehouse to BigQuery without changing how data flows.</li>
               <li><b>Live results:</b> 690 predictions backfilled and tracked daily. As of Sep 2026 the model hits 49.6% vs. 52.5% for always predicting "up", inside the ±3.7-point margin of error. The dashboard shows this next to every prediction.</li>
+              <li><b>The model it serves:</b> an LSTM with no <code>model.fit()</code>. Every gate, gradient, and weight update is written by hand in CuPy (Xavier init, BPTT, gradient clipping), and I found and fixed four silent gradient bugs along the way.</li>
+              <li><b>Sentiment model:</b> fine-tuned CryptoBERT on 59k+ relabeled news headlines, taking macro-F1 from 0.39 to 0.79 with a market-impact labeling rubric and 500 targeted synthetic examples. The model and dataset are public on Hugging Face.</li>
+              <li><b>Features:</b> 27 engineered features (RSI, MACD, Bollinger Bands, ATR, VWAP, SPY/DXY returns, sentiment rolling averages), pruned to 22 by removing pairs correlated above 0.95.</li>
+              <li><b>Rigor:</b> a purged chronological 70/15/15 split with a horizon-length gap. An early 0.551 accuracy turned out to be selection bias from early stopping on test data, and retraining properly exposed it.</li>
+              <li><b>Finding:</b> five independent checks (logistic regression, gradient boosting, and three LSTM setups) all land at the no-information baseline. Technical indicators plus sentiment don't predict 3-day BTC direction, and I can show it with numbers.</li>
             </ul>
             <div class="modal-links">
               <a href="https://btc-direction-dashboard.onrender.com" target="_blank" rel="noopener">Live dashboard ↗</a>
