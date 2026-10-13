@@ -148,7 +148,7 @@
       ? list.map((p) => `
         <button class="recipe" role="option" type="button" data-id="${p.id}" aria-selected="${p.id === selected}">
           <span class="slot">${img(p.icon, 32)}</span>
-          <span class="name">${esc(p.name)}<span class="org">${esc(p.org)}${p.live ? ' · <span class="live">● Live</span>' : ""}</span></span>
+          <span class="name">${esc(p.name)}<span class="org">${esc(p.org)}${p.live ? ' · <span class="live"><i class="dot"></i>Live</span>' : ""}</span></span>
         </button>`).join("")
       : `<p style="padding:8px;margin:0;color:#333">No recipes found.</p>`;
   }
@@ -181,14 +181,14 @@
       </div>
       <div>
         <h3>${esc(p.title)}</h3>
-        <div class="org">${esc(p.org)}${p.live ? ' · <span class="live">● Live demo</span>' : ""}</div>
+        <div class="org">${esc(p.org)}${p.live ? ' · <span class="live"><i class="dot"></i>Live demo</span>' : ""}</div>
       </div>
       <p>${esc(p.desc)}</p>
       <div class="ingredients">Ingredients: ${p.tags.map(esc).join(", ")}</div>
       <div class="actions">
         <button class="mc-btn" type="button" id="readMore">Read more</button>
-        ${primary ? `<a class="mc-btn" href="${primary.href}" target="_blank" rel="noopener">${esc(primary.label)} ↗</a>` : ""}
-        ${gh ? `<a class="mc-btn" href="${gh.href}" target="_blank" rel="noopener">GitHub ↗</a>` : ""}
+        ${primary ? `<a class="mc-btn" href="${primary.href}" target="_blank" rel="noopener">${esc(primary.label)}</a>` : ""}
+        ${gh ? `<a class="mc-btn" href="${gh.href}" target="_blank" rel="noopener">GitHub</a>` : ""}
       </div>`;
     $("#readMore", bench).addEventListener("click", () => openDetail(p.id));
     const filled = $$(".grid3 .slot", bench).filter((s) => s.firstChild);
@@ -207,7 +207,7 @@
       <p class="by">${esc(p.detailMeta)}</p>
       ${p.intro ? `<p>${esc(p.intro)}</p>` : ""}
       <ul>${p.points.map((x) => `<li>${x}</li>`).join("")}</ul>
-      ${p.links.length ? `<div class="links">${p.links.map((l) => `<a href="${l.href}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>` : ""}
+      ${p.links.length ? `<div class="links">${p.links.map((l) => `<a href="${l.href}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div>` : ""}
       <div class="close"><button class="mc-btn" type="button" id="detailDone">Done</button></div>`;
     $("#detailDone").addEventListener("click", () => detail.close());
     detail.showModal();
@@ -397,7 +397,7 @@
       return;
     }
     say(`<span class="who">&lt;You&gt;</span> ${esc(msg)}`);
-    say("Opening your email app with that message…", "sys");
+    say("Opening your email app with that message...", "sys");
     location.href = mailto(msg);
   });
 

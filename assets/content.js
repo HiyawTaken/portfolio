@@ -45,7 +45,7 @@ window.CONTENT = {
       org: "Personal project · 2026",
       live: true,
       cats: ["ai", "ml", "data", "personal"],
-      metric: { value: "0.39 → 0.79", label: "sentiment macro-F1" },
+      metric: { value: "0.39 -> 0.79", label: "sentiment macro-F1" },
       desc: "A production data pipeline that runs every morning with no one touching it: it ingests BTC prices and crypto headlines into a BigQuery warehouse, transforms them with dbt, orchestrates with Airflow, and serves daily predictions to a live dashboard. The model behind it is one I built from scratch, and the dashboard is honest that it doesn't beat guessing.",
       tags: ["BigQuery", "dbt", "Airflow", "GitHub Actions", "FastAPI", "CuPy", "CryptoBERT"],
       detailMeta: "Personal project · 2026 · Live dashboard",
@@ -83,7 +83,7 @@ window.CONTENT = {
       intro: "A handwritten-digit recognizer built from scratch using only NumPy and CuPy, served behind a live web demo.",
       points: [
         "<b>97.32% test accuracy</b> on MNIST (60,000 training images, 10,000 test images).",
-        "<b>Architecture:</b> 784 → 128 → 64 → 10, ReLU hidden layers, softmax output, categorical cross-entropy.",
+        "<b>Architecture:</b> 784 -> 128 -> 64 -> 10, ReLU hidden layers, softmax output, categorical cross-entropy.",
         "<b>No ML libraries:</b> the forward pass, backpropagation, and mini-batch gradient descent are all written by hand.",
         "<b>Deployed:</b> a FastAPI backend in Docker with a browser canvas frontend.",
       ],
@@ -106,7 +106,7 @@ window.CONTENT = {
       detailMeta: "Personal project · Live demo",
       intro: "A character-level language model trained on the complete works of Shakespeare. Enter a seed phrase, pick a model, and it generates a continuation one character at a time, with a temperature slider for creativity.",
       points: [
-        "<b>Architecture:</b> Embedding (64) → 2-layer SimpleRNN or LSTM (256 units) → softmax over a 50-character vocabulary, with a 40-character sliding window.",
+        "<b>Architecture:</b> Embedding (64) -> 2-layer SimpleRNN or LSTM (256 units) -> softmax over a 50-character vocabulary, with a 40-character sliding window.",
         "<b>Found a silent bug after deploying:</b> the vocabulary came from an unordered Python set, so training and inference used different character mappings. Building it from a sorted list fixed it.",
         "<b>RNN vs. LSTM:</b> the SimpleRNN plateaued at 51% val accuracy (loss 1.60), a visible case of vanishing gradients. Swapping in an LSTM reached 56% (loss 1.47) and converged in 7 epochs instead of 12.",
         "<b>Deployed:</b> a FastAPI backend in Docker with a live browser demo.",
