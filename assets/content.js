@@ -125,7 +125,7 @@ window.CONTENT = {
       cats: ["ai", "data"],
       desc: "Correlates signals from customer feedback, CI/CD, security tooling, and monitoring into ranked, evidence-backed improvement recommendations.",
       tags: ["LLMs", "Signal correlation", "Ranking", "Decision support"],
-      detailMeta: "Applied AI Engineering Extern · Paychex · Sep 2026 – Present",
+      detailMeta: "Applied AI Engineering Extern · Paychex · Sep 2026 - Present",
       intro: "A sponsored university capstone for a Fortune 500 HR-tech company.",
       points: [
         "Correlates signals across customer feedback, CI/CD pipelines, quality and security tooling, and operational monitoring.",
@@ -144,7 +144,7 @@ window.CONTENT = {
       cats: ["ai"],
       desc: "OCR and RAG that extract and classify data from messy pharmaceutical vendor files.",
       tags: ["RAG", "LlamaIndex", "PaddleOCR", "Tesseract"],
-      detailMeta: "AI-Powered Document Intelligence Externship · Extern × Pfizer · Aug 2026 – Present",
+      detailMeta: "AI-Powered Document Intelligence Externship · Extern × Pfizer · Aug 2026 - Present",
       intro: "An externship through Extern, building an AI document-intelligence prototype for Pfizer's clinical supply chain.",
       points: [
         "Built AI pipelines to process pharmaceutical vendor files using OCR (Tesseract, PaddleOCR) and RAG for data extraction and classification.",
@@ -181,7 +181,7 @@ window.CONTENT = {
       cats: ["data"],
       desc: "SQL pipelines and live Tableau dashboards on ServiceTitan and Salesforce data.",
       tags: ["SQL", "Azure SQL", "Tableau", "SSMS"],
-      detailMeta: "Analytics Engineering Intern · Michael & Son Services · May 2026 – Present",
+      detailMeta: "Analytics Engineering Intern · Michael & Son Services · May 2026 - Present",
       intro: "",
       points: [
         "Built complex SQL reporting pipelines against field service platforms (ServiceTitan, Salesforce) using SSMS and Azure SQL.",
@@ -220,7 +220,7 @@ window.CONTENT = {
       icon: "compass",
       role: "Applied AI Engineering Extern",
       org: "Paychex",
-      meta: "Sep 2026 – Present · Phoenix, AZ",
+      meta: "Sep 2026 - Present · Phoenix, AZ",
       points: [
         "Building an <b>AI-powered decision-support system</b> for engineering leadership at a Fortune 500 HR-tech company, as a sponsored university capstone.",
         "Correlates customer feedback, CI/CD, quality and security tooling, and monitoring into <b>ranked recommendations</b> with impact scores and ROI estimates.",
@@ -233,7 +233,7 @@ window.CONTENT = {
       icon: "potion",
       role: "AI Document Intelligence Extern",
       org: "Extern × Pfizer",
-      meta: "Aug 2026 – Present · Externship through Extern, project for Pfizer",
+      meta: "Aug 2026 - Present · Externship through Extern, project for Pfizer",
       points: [
         "Built AI pipelines for pharmaceutical vendor files using <b>OCR (Tesseract, PaddleOCR) and RAG</b> for extraction and classification.",
         "Developed a <b>LlamaIndex</b> retrieval system tuned through chunking and open-source LLMs.",
@@ -246,7 +246,7 @@ window.CONTENT = {
       icon: "map",
       role: "Analytics Engineering Intern",
       org: "Michael & Son Services",
-      meta: "May 2026 – Present · Alexandria, VA",
+      meta: "May 2026 - Present · Alexandria, VA",
       points: [
         "Built complex <b>SQL reporting pipelines</b> against ServiceTitan and Salesforce with SSMS and Azure SQL.",
         "Designed and validated KPI methodology against a nightly SQL replica for cross-platform consistency.",
@@ -273,7 +273,7 @@ window.CONTENT = {
       icon: "book",
       role: "Program Development Specialist Intern",
       org: "Grand Canyon Education",
-      meta: "Oct 2024 – Aug 2025 · Phoenix, AZ",
+      meta: "Oct 2024 - Aug 2025 · Phoenix, AZ",
       points: [
         "Presented the College of Engineering and Technology to prospective students and led campus tours.",
         "Called <b>100+ prospective students a week</b> to guide them through admissions.",
@@ -304,14 +304,14 @@ window.CONTENT = {
       { icon: "guitar", label: "Guitar" },
     ],
     leadership: [
-      { title: "Co-Founder & VP", sub: "Lopes Leetcode: peer-led interview prep", date: "2026 –" },
-      { title: "AWS Student Builder Campus Leader", sub: "Wasserman Next Gen", date: "2026 –" },
-      { title: "Resident Associate", sub: "Grand Canyon University", date: "2025 –" },
-      { title: "Global Outreach Leader", sub: "Camp Flourish kids ministry", date: "2024 – 25" },
+      { title: "Co-Founder & VP", sub: "Lopes Leetcode: peer-led interview prep", date: "2026 -" },
+      { title: "AWS Student Builder Campus Leader", sub: "Wasserman Next Gen", date: "2026 -" },
+      { title: "Resident Associate", sub: "Grand Canyon University", date: "2025 -" },
+      { title: "Global Outreach Leader", sub: "Camp Flourish kids ministry", date: "2024 - 25" },
       { title: "ColorStack", sub: "Member", date: "" },
     ],
     education: [
-      { title: "B.S. Computer Science (Honors)", sub: "Grand Canyon University", date: "2024 – 27" },
+      { title: "B.S. Computer Science (Honors)", sub: "Grand Canyon University", date: "2024 - 27" },
       { title: "Applied AI Engineering", sub: "CodePath", date: "2026" },
       { title: "Agentic AI Development", sub: "Microcredential", date: "" },
       { title: "Enterprise Design Thinking", sub: "Practitioner", date: "" },

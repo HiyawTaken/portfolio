@@ -27,7 +27,7 @@
   }
   root.style.setProperty("--stone-tex", noiseTex([122, 122, 122], 0.32));
   root.style.setProperty("--dirt-tex", noiseTex([52, 40, 30], 0.45));
-  $(".logo .word span").style.backgroundImage = noiseTex([170, 170, 170], 0.35);
+  drawLogo($("#logoCanvas"), "HIYAW ERTIRO", "DATA & AI EDITION");
 
   const favicon = document.createElement("link");
   favicon.rel = "icon";

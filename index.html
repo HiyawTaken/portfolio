@@ -8,9 +8,7 @@
 <meta property="og:title" content="Hiyaw Ertiro — Data & AI Edition">
 <meta property="og:description" content="Data pipelines and ML systems, built end-to-end.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/Minecraftia-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 <script>
   // Apply saved motion preference before paint.
@@ -40,10 +38,9 @@
   <section class="screen" id="title" data-route="" aria-label="Main menu">
     <div class="logo">
       <h1>
-        <span class="word" data-text="HIYAW ERTIRO"><span>HIYAW ERTIRO</span></span>
-        <span class="sr-only">— portfolio</span>
+        <canvas id="logoCanvas" aria-hidden="true"></canvas>
+        <span class="sr-only">Hiyaw Ertiro — Data &amp; AI Edition portfolio</span>
       </h1>
-      <div class="edition">DATA &amp; AI EDITION</div>
       <button class="splash" id="splash" aria-label="Next splash text"></button>
     </div>
     <p class="roles" id="roles"></p>
@@ -162,6 +159,7 @@
 
 <script src="assets/content.js"></script>
 <script src="assets/sprites.js"></script>
+<script src="assets/logo.js"></script>
 <script src="assets/sound.js"></script>
 <script src="assets/app.js"></script>
 <script type="module" src="assets/world.js"></script>
