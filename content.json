@@ -1,0 +1,701 @@
+{
+  "name": "Hiyaw Ertiro",
+  "email": "hiyaw12ertiro@gmail.com",
+  "github": "https://github.com/HiyawTaken",
+  "linkedin": "https://www.linkedin.com/in/hiyawertiro",
+  "source": "https://hiyawtaken.github.io/portfolio/",
+  "about": "Hi, I’m Hiyaw! I’m a CS student at GCU, and I like building things with data and AI. I enjoy taking an idea and figuring out how to make the whole thing work, from the data to the model to the app someone can use. My faith is a big part of my life. Outside of coding, I’m into boxing, lifting, chess, and guitar.",
+  "projects": [
+    {
+      "name": "End-to-end Bitcoin prediction pipeline",
+      "slug": "btc-prediction-pipeline",
+      "blurb": "A production data pipeline that runs every morning with no one touching it: it ingests BTC prices and crypto headlines into a BigQuery warehouse, transforms them with dbt, orchestrates with Airflow, and serves daily predictions to a live dashboard. The model behind it is one I built from scratch, and the dashboard is honest that it doesn't beat guessing.",
+      "tech": [
+        "BigQuery",
+        "dbt",
+        "Airflow",
+        "GitHub Actions",
+        "FastAPI",
+        "CuPy",
+        "CryptoBERT"
+      ],
+      "status": "deployed",
+      "icon": "BTC",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "BTC prediction pipeline",
+          "text": "Personal project · 2026 · Live dashboard The production system around a model I'd already built: ingestion, a warehouse, transformations, orchestration, inference, and serving. Every day it pulls yesterday's Bitcoin close and a few hundred crypto headlines, scores the headlines, rebuilds the features, predicts where BTC lands 3 days out, and publishes the call. Swapping in a better model later is one file and a rerun."
+        },
+        {
+          "type": "message",
+          "title": "Production pipeline",
+          "text": "Production pipeline: daily ingestion into a BigQuery warehouse (raw, staging, and marts layers), dbt transformations, and a 7-task Airflow 3 DAG run on GitHub Actions. Inference is a NumPy-only forward pass, so production needs no GPU, and a FastAPI dashboard on Render serves the results."
+        },
+        {
+          "type": "message",
+          "title": "Built to fail loudly",
+          "text": "Built to fail loudly: idempotent merges on every load, a guard that refuses to predict on stale features, and a post-run check that fails the workflow if no fresh prediction landed. When my Snowflake trial ended mid-build, I moved the warehouse to BigQuery without changing how data flows."
+        },
+        {
+          "type": "message",
+          "title": "Live results",
+          "text": "Live results: 690 predictions backfilled and tracked daily. As of Sep 2026 the model hits 49.6% vs. 52.5% for always predicting \"up\", inside the ±3.7-point margin of error. The dashboard shows this next to every prediction."
+        },
+        {
+          "type": "message",
+          "title": "The model it serves",
+          "text": "The model it serves: an LSTM with no model.fit(). Every gate, gradient, and weight update is written by hand in CuPy (Xavier init, BPTT, gradient clipping), and I found and fixed four silent gradient bugs along the way."
+        },
+        {
+          "type": "message",
+          "title": "Sentiment model",
+          "text": "Sentiment model: fine-tuned CryptoBERT on 59k+ relabeled news headlines, taking macro-F1 from 0.39 to 0.79 with a market-impact labeling rubric and 500 targeted synthetic examples. The model and dataset are public on Hugging Face."
+        },
+        {
+          "type": "message",
+          "title": "Features",
+          "text": "Features: 27 engineered features (RSI, MACD, Bollinger Bands, ATR, VWAP, SPY/DXY returns, sentiment rolling averages), pruned to 22 by removing pairs correlated above 0.95."
+        },
+        {
+          "type": "message",
+          "title": "Rigor",
+          "text": "Rigor: a purged chronological 70/15/15 split with a horizon-length gap. An early 0.551 accuracy turned out to be selection bias from early stopping on test data, and retraining properly exposed it."
+        },
+        {
+          "type": "message",
+          "title": "Finding",
+          "text": "Finding: five independent checks (logistic regression, gradient boosting, and three LSTM setups) all land at the no-information baseline. Technical indicators plus sentiment don't predict 3-day BTC direction, and I can show it with numbers."
+        },
+        {
+          "type": "message",
+          "title": "Performance at a glance",
+          "text": "Clean holdout: 51.5% direction accuracy vs. 51.8% majority baseline (606 rows).\n\nPipeline backfill: 49.6% hit rate vs. 52.5% always-up baseline (687 scored predictions; September 24, 2026).\n\nThe Bitcoin direction model did not beat either baseline."
+        }
+      ],
+      "links": [
+        {
+          "label": "Live dashboard",
+          "url": "https://btc-direction-dashboard.onrender.com"
+        },
+        {
+          "label": "Pipeline repo",
+          "url": "https://github.com/HiyawTaken/btc-prediction-pipeline"
+        },
+        {
+          "label": "Modeling repo",
+          "url": "https://github.com/HiyawTaken/btc-sentiment-predictor"
+        },
+        {
+          "label": "Model on Hugging Face",
+          "url": "https://huggingface.co/HiyawErtiro/cryptobert-finetuned_on_news_headlines"
+        },
+        {
+          "label": "Dataset",
+          "url": "https://huggingface.co/datasets/HiyawErtiro/bitcoin-news-sentiments-latest"
+        }
+      ],
+      "built": "",
+      "year": 2026,
+      "github": "https://github.com/HiyawTaken/btc-prediction-pipeline",
+      "live": "https://btc-direction-dashboard.onrender.com"
+    },
+    {
+      "name": "DrawADigit: a neural net from scratch",
+      "slug": "drawadigit",
+      "blurb": "Draw a digit in the browser and a network I built in pure NumPy/CuPy classifies it in real time. No ML libraries.",
+      "tech": [
+        "NumPy",
+        "CuPy",
+        "FastAPI",
+        "Docker"
+      ],
+      "status": "deployed",
+      "icon": "0–9",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "DrawADigit",
+          "text": "Personal project · Live demo A handwritten-digit recognizer built from scratch using only NumPy and CuPy, served behind a live web demo."
+        },
+        {
+          "type": "message",
+          "title": "97.32% test accuracy",
+          "text": "97.32% test accuracy on MNIST (60,000 training images, 10,000 test images)."
+        },
+        {
+          "type": "message",
+          "title": "Architecture",
+          "text": "Architecture: 784 → 128 → 64 → 10, ReLU hidden layers, softmax output, categorical cross-entropy."
+        },
+        {
+          "type": "message",
+          "title": "No ML libraries",
+          "text": "No ML libraries: the forward pass, backpropagation, and mini-batch gradient descent are all written by hand."
+        },
+        {
+          "type": "message",
+          "title": "Deployed",
+          "text": "Deployed: a FastAPI backend in Docker with a browser canvas frontend."
+        },
+        {
+          "type": "message",
+          "title": "Performance at a glance",
+          "text": "97.3% MNIST test accuracy"
+        }
+      ],
+      "links": [
+        {
+          "label": "Try the live demo",
+          "url": "https://drawadigit.onrender.com"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/HiyawTaken/DrawADigit"
+        }
+      ],
+      "built": "",
+      "github": "https://github.com/HiyawTaken/DrawADigit",
+      "live": "https://drawadigit.onrender.com"
+    },
+    {
+      "name": "Shakespeare autocomplete: RNN vs. LSTM",
+      "slug": "shakespeare-autocomplete",
+      "blurb": "A character-level language model trained on Shakespeare's complete works. Type a seed phrase and it writes the rest.",
+      "tech": [
+        "Keras",
+        "TensorFlow",
+        "FastAPI",
+        "Docker"
+      ],
+      "status": "deployed",
+      "icon": "Aa",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "Shakespeare autocomplete",
+          "text": "Personal project · Live demo A character-level language model trained on the complete works of Shakespeare. Enter a seed phrase, pick a model, and it generates a continuation one character at a time, with a temperature slider for creativity."
+        },
+        {
+          "type": "message",
+          "title": "Architecture",
+          "text": "Architecture: Embedding (64) → 2-layer SimpleRNN or LSTM (256 units) → softmax over a 50-character vocabulary, with a 40-character sliding window."
+        },
+        {
+          "type": "message",
+          "title": "Found a silent bug after deploying",
+          "text": "Found a silent bug after deploying: the vocabulary came from an unordered Python set, so training and inference used different character mappings. Building it from a sorted list fixed it."
+        },
+        {
+          "type": "message",
+          "title": "RNN vs. LSTM",
+          "text": "RNN vs. LSTM: the SimpleRNN plateaued at 51% val accuracy (loss 1.60), a visible case of vanishing gradients. Swapping in an LSTM reached 56% (loss 1.47) and converged in 7 epochs instead of 12."
+        },
+        {
+          "type": "message",
+          "title": "Deployed",
+          "text": "Deployed: a FastAPI backend in Docker with a live browser demo."
+        },
+        {
+          "type": "message",
+          "title": "Performance at a glance",
+          "text": "56% LSTM val acc · RNN 51%"
+        }
+      ],
+      "links": [
+        {
+          "label": "Try the live demo",
+          "url": "https://shakespeare-rnn.onrender.com"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/HiyawTaken/shakespeare-rnn"
+        }
+      ],
+      "built": "",
+      "github": "https://github.com/HiyawTaken/shakespeare-rnn",
+      "live": "https://shakespeare-rnn.onrender.com"
+    },
+    {
+      "name": "AI decision-support engine for engineering leadership",
+      "slug": "ai-decision-support",
+      "blurb": "Correlates signals from customer feedback, CI/CD, security tooling, and monitoring into ranked, evidence-backed improvement recommendations.",
+      "tech": [
+        "LLMs",
+        "Signal correlation",
+        "Ranking",
+        "Decision support"
+      ],
+      "status": "ongoing",
+      "icon": "AI",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "AI decision-support engine",
+          "text": "Applied AI Engineering Extern · Paychex · Sep 2026 – Present A sponsored university capstone for a Fortune 500 HR-tech company."
+        },
+        {
+          "type": "message",
+          "title": "Details",
+          "text": "Correlates signals across customer feedback, CI/CD pipelines, quality and security tooling, and operational monitoring."
+        },
+        {
+          "type": "message",
+          "title": "Detail 2",
+          "text": "Surfaces ranked improvement recommendations with impact scores, ROI estimates, and links to supporting evidence."
+        },
+        {
+          "type": "message",
+          "title": "Detail 3",
+          "text": "Stakeholders adjust prioritization weights (customer impact, capacity creation, risk reduction) and see rankings recalculate with no code changes."
+        },
+        {
+          "type": "message",
+          "title": "Detail 4",
+          "text": "Designed for on-demand runs, with a path to scheduled and continuous operation."
+        }
+      ],
+      "links": [],
+      "built": "",
+      "year": 2026
+    },
+    {
+      "name": "Document intelligence pipeline",
+      "slug": "document-intelligence",
+      "blurb": "OCR and RAG that extract and classify data from messy pharmaceutical vendor files.",
+      "tech": [
+        "RAG",
+        "LlamaIndex",
+        "PaddleOCR",
+        "Tesseract"
+      ],
+      "status": "ongoing",
+      "icon": "OCR",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "Document intelligence pipeline",
+          "text": "AI-Powered Document Intelligence Externship · Extern × Pfizer · Aug 2026 – Present An externship through Extern, building an AI document-intelligence prototype for Pfizer's clinical supply chain."
+        },
+        {
+          "type": "message",
+          "title": "Details",
+          "text": "Built AI pipelines to process pharmaceutical vendor files using OCR (Tesseract, PaddleOCR) and RAG for data extraction and classification."
+        },
+        {
+          "type": "message",
+          "title": "Detail 2",
+          "text": "Developed a RAG document-retrieval system with LlamaIndex, optimized with chunk tuning and open-source LLMs."
+        },
+        {
+          "type": "message",
+          "title": "Detail 3",
+          "text": "Ran end-to-end evaluation: benchmarked OCR accuracy, retrieval quality, and routing performance."
+        },
+        {
+          "type": "message",
+          "title": "Detail 4",
+          "text": "Delivered a technical report on model trade-offs, optimization strategies, and deployment recommendations, plus a demo UI."
+        }
+      ],
+      "links": [],
+      "built": "",
+      "year": 2026
+    },
+    {
+      "name": "Inbound demand forecasting",
+      "slug": "inbound-demand-forecasting",
+      "blurb": "XGBoost regression predicting daily call volume to drive staffing decisions.",
+      "tech": [
+        "XGBoost",
+        "Python",
+        "Azure SQL"
+      ],
+      "status": "internal",
+      "icon": "XGB",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "Inbound demand forecasting",
+          "text": "Analytics Engineering Intern · Michael & Son Services · 2026"
+        },
+        {
+          "type": "message",
+          "title": "Details",
+          "text": "Built an XGBoost regression model to predict daily inbound demand."
+        },
+        {
+          "type": "message",
+          "title": "Detail 2",
+          "text": "Forecasts support call-center staffing decisions."
+        },
+        {
+          "type": "message",
+          "title": "Detail 3",
+          "text": "Features come from the same SQL infrastructure behind company-wide reporting."
+        }
+      ],
+      "links": [],
+      "built": "",
+      "year": 2026
+    },
+    {
+      "name": "Cross-platform KPI reporting",
+      "slug": "kpi-reporting",
+      "blurb": "SQL pipelines and live Tableau dashboards on ServiceTitan and Salesforce data.",
+      "tech": [
+        "SQL",
+        "Azure SQL",
+        "Tableau",
+        "SSMS"
+      ],
+      "status": "internal",
+      "icon": "SQL",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "Cross-platform KPI reporting",
+          "text": "Analytics Engineering Intern · Michael & Son Services · May 2026 – Present"
+        },
+        {
+          "type": "message",
+          "title": "Details",
+          "text": "Built complex SQL reporting pipelines against field service platforms (ServiceTitan, Salesforce) using SSMS and Azure SQL."
+        },
+        {
+          "type": "message",
+          "title": "Detail 2",
+          "text": "Designed and validated KPI methodology, reproducing native platform metrics from a nightly SQL replica for consistent cross-platform reporting."
+        },
+        {
+          "type": "message",
+          "title": "Detail 3",
+          "text": "Built technician-performance and operational dashboards in Tableau on live data."
+        },
+        {
+          "type": "message",
+          "title": "Detail 4",
+          "text": "Assisted the on-premises to Azure database migration; building LLM-powered reporting automation."
+        }
+      ],
+      "links": [],
+      "built": "",
+      "year": 2026
+    },
+    {
+      "name": "Distributed LLM training on a supercomputer",
+      "slug": "distributed-llm-training",
+      "blurb": "A week-long Argonne bootcamp: trained a transformer on NERSC's Perlmutter, scaling from one device to multi-process execution.",
+      "tech": [
+        "PyTorch",
+        "Slurm",
+        "Mixed precision"
+      ],
+      "status": "shipped",
+      "icon": "HPC",
+      "showcase": [
+        {
+          "type": "message",
+          "title": "Distributed LLM training",
+          "text": "Week-long HPC Bootcamp · Argonne Leadership Computing Facility · Aug 2026 Selected for Argonne National Laboratory's competitive, week-long Intro to HPC Bootcamp."
+        },
+        {
+          "type": "message",
+          "title": "Details",
+          "text": "Built and ran an end-to-end distributed training workflow for a transformer language model on NERSC's Perlmutter."
+        },
+        {
+          "type": "message",
+          "title": "Detail 2",
+          "text": "Scaled from single-device to multi-process training: tokenization, gradient synchronization, checkpointing, mixed precision, and throughput analysis with PyTorch and Slurm."
+        },
+        {
+          "type": "message",
+          "title": "Detail 3",
+          "text": "Toured the Aurora exascale supercomputer."
+        },
+        {
+          "type": "message",
+          "title": "Detail 4",
+          "text": "Presented findings to bootcamp participants and Argonne research staff."
+        }
+      ],
+      "links": [],
+      "built": "",
+      "year": 2026
+    }
+  ],
+  "experience": [
+    {
+      "role": "Applied AI Engineering Extern",
+      "company": "Paychex",
+      "dates": "Sep 2026 – Present",
+      "location": "Phoenix, AZ",
+      "bullets": [
+        "Building an AI-powered decision-support system for engineering leadership at a Fortune 500 HR-tech company, as a sponsored university capstone.",
+        "Correlates customer feedback, CI/CD, quality and security tooling, and monitoring into ranked recommendations with impact scores and ROI estimates.",
+        "Prioritization weights can be tuned live, with rankings recalculated and no code changes."
+      ]
+    },
+    {
+      "role": "AI Document Intelligence Extern",
+      "company": "Extern × Pfizer",
+      "dates": "Aug 2026 – Present",
+      "location": "Externship through Extern, project for Pfizer",
+      "bullets": [
+        "Built AI pipelines for pharmaceutical vendor files using OCR (Tesseract, PaddleOCR) and RAG for extraction and classification.",
+        "Developed a LlamaIndex retrieval system tuned through chunking and open-source LLMs.",
+        "Benchmarked OCR accuracy, retrieval quality, and routing; delivered a technical report with deployment recommendations and a demo UI."
+      ]
+    },
+    {
+      "role": "Analytics Engineering Intern",
+      "company": "Michael & Son Services",
+      "dates": "May 2026 – Present",
+      "location": "Alexandria, VA",
+      "bullets": [
+        "Built complex SQL reporting pipelines against ServiceTitan and Salesforce with SSMS and Azure SQL.",
+        "Designed and validated KPI methodology against a nightly SQL replica for cross-platform consistency.",
+        "Built an XGBoost demand-forecasting model for call-center staffing.",
+        "Shipped live Tableau dashboards and supported the on-prem to Azure migration; building LLM-powered reporting automation."
+      ]
+    },
+    {
+      "role": "HPC Bootcamp: Distributed LLM Training",
+      "company": "Argonne",
+      "dates": "Aug 2026",
+      "location": "One-week bootcamp · Chicago, IL",
+      "bullets": [
+        "Selected for Argonne National Laboratory's competitive, week-long Intro to HPC Bootcamp.",
+        "Trained a transformer on NERSC's Perlmutter, from single-device to multi-process, with PyTorch and Slurm.",
+        "Presented distributed-training results to Argonne research staff."
+      ]
+    },
+    {
+      "role": "Program Development Specialist Intern",
+      "company": "Grand Canyon Education",
+      "dates": "Oct 2024 – Aug 2025",
+      "location": "Phoenix, AZ",
+      "bullets": [
+        "Presented the College of Engineering and Technology to prospective students and led campus tours.",
+        "Called 100+ prospective students a week to guide them through admissions.",
+        "Pitched, recorded, and edited social media content."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "B.S. Computer Science (Honors)",
+      "subtitle": "Grand Canyon University",
+      "dates": "2024 – 27"
+    },
+    {
+      "title": "Applied AI Engineering",
+      "subtitle": "CodePath",
+      "dates": "2026"
+    },
+    {
+      "title": "Agentic AI Development",
+      "subtitle": "Microcredential",
+      "dates": ""
+    },
+    {
+      "title": "Enterprise Design Thinking",
+      "subtitle": "Practitioner",
+      "dates": ""
+    },
+    {
+      "title": "AI Fluency · Claude 101",
+      "subtitle": "Framework & Foundations",
+      "dates": ""
+    }
+  ],
+  "leadership": [
+    {
+      "title": "Co-Founder & VP",
+      "subtitle": "Lopes Leetcode: peer-led interview prep",
+      "dates": "2026 –"
+    },
+    {
+      "title": "AWS Student Builder Campus Leader",
+      "subtitle": "Wasserman Next Gen",
+      "dates": "2026 –"
+    },
+    {
+      "title": "Resident Associate",
+      "subtitle": "Grand Canyon University",
+      "dates": "2025 –"
+    },
+    {
+      "title": "Global Outreach Leader",
+      "subtitle": "Camp Flourish kids ministry",
+      "dates": "2024 – 25"
+    },
+    {
+      "title": "ColorStack",
+      "subtitle": "Member",
+      "dates": ""
+    }
+  ],
+  "skills": [
+    {
+      "title": "Languages",
+      "items": [
+        {
+          "name": "Python"
+        },
+        {
+          "name": "SQL"
+        },
+        {
+          "name": "Java"
+        },
+        {
+          "name": "C++"
+        },
+        {
+          "name": "JavaScript"
+        }
+      ],
+      "icon": "/images/skills/diamond-sword.png"
+    },
+    {
+      "title": "ML & AI",
+      "items": [
+        {
+          "name": "PyTorch"
+        },
+        {
+          "name": "XGBoost"
+        },
+        {
+          "name": "LlamaIndex"
+        },
+        {
+          "name": "RAG"
+        },
+        {
+          "name": "OCR"
+        },
+        {
+          "name": "Feature Engineering"
+        },
+        {
+          "name": "CuPy"
+        },
+        {
+          "name": "NumPy"
+        },
+        {
+          "name": "Keras"
+        },
+        {
+          "name": "TensorFlow"
+        },
+        {
+          "name": "Hugging Face"
+        }
+      ],
+      "icon": "/images/skills/diamond-pickaxe.png"
+    },
+    {
+      "title": "Data",
+      "items": [
+        {
+          "name": "BigQuery"
+        },
+        {
+          "name": "Snowflake"
+        },
+        {
+          "name": "Airflow"
+        },
+        {
+          "name": "dbt"
+        },
+        {
+          "name": "Azure SQL"
+        },
+        {
+          "name": "SSMS"
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "GitHub Actions"
+        }
+      ],
+      "icon": "/images/skills/diamond-shovel.png"
+    },
+    {
+      "title": "Cloud & Compute",
+      "items": [
+        {
+          "name": "AWS"
+        },
+        {
+          "name": "Azure"
+        },
+        {
+          "name": "Slurm"
+        },
+        {
+          "name": "Distributed Training"
+        },
+        {
+          "name": "Docker"
+        }
+      ],
+      "icon": "/images/skills/diamond-axe.png"
+    },
+    {
+      "title": "Visualization",
+      "items": [
+        {
+          "name": "Tableau"
+        },
+        {
+          "name": "Matplotlib"
+        }
+      ],
+      "icon": "/images/skills/enchant-book.png"
+    },
+    {
+      "title": "Platforms",
+      "items": [
+        {
+          "name": "ServiceTitan"
+        },
+        {
+          "name": "Salesforce"
+        }
+      ],
+      "icon": "/images/skills/diamond-pickaxe.png"
+    }
+  ],
+  "hobbies": [
+    "Boxing",
+    "Weightlifting",
+    "Chess",
+    "Guitar"
+  ],
+  "stats": [
+    {
+      "value": "8+ hrs",
+      "label": "saved per week for executive decision-makers at Paychex through data-driven insights"
+    },
+    {
+      "value": "3",
+      "label": "industry roles in 2026: Paychex, Extern × Pfizer, and Michael & Son"
+    },
+    {
+      "value": "1×",
+      "label": "hackathon winner"
+    },
+    {
+      "value": "2027",
+      "label": "Honors B.S. Computer Science, Grand Canyon University"
+    }
+  ]
+}

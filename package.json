@@ -1,0 +1,7 @@
+{
+  "name": "hiyaw-portfolio",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/check.mjs"
+  }
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hiyawtaken.github.io/portfolio/sitemap.xml
